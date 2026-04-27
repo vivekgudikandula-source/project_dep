@@ -81,31 +81,38 @@ WSGI_APPLICATION = 'jango_deployment.wsgi.application'
 # }
 
 
-import os
-if os.environ.get("RENDER"):
-    # production (render + aliven)
-    DATABASES={
-        "default":{
-            "ENGINE":"django.db.backends.mysql",
-            "NAME":os.environ.get("MYSQLDATABASE"),
-            "USER":os.environ.get("MYSQLUSER"),
-            "PASSWORD":os.environ.get("MYSQLPASSWORD"),
-            "HOST":os.environ.get("MYSQLHOST"),
-            "PORT":os.environ.get("MYSQLPORT","3306"),
-        }
-    }
-else:
-      # LOCAL DEVELOPMENT
-      DATABASES={
-        "default":{
-            "ENGINE":"django.db.backends.mysql",
-            "NAME":"jango_deploy",
-            "USER":"root",
-            "PASSWORD":"viveksql",
-            "HOST":"localhost",
-            "PORT":"3306",
-        }
-    }
+# import os
+# if os.environ.get("RENDER"):
+#     # production (render + aliven)
+#     DATABASES={
+#         "default":{
+#             "ENGINE":"django.db.backends.mysql",
+           
+#             "NAME":os.environ.get("MYSQLDATABASE"),
+#             "USER":os.environ.get("MYSQLUSER"),
+#             "PASSWORD":os.environ.get("MYSQLPASSWORD"),
+#             "HOST":os.environ.get("MYSQLHOST"),
+#             "PORT":os.environ.get("MYSQLPORT","3306"),
+#         }
+#     }
+# else:
+#       # LOCAL DEVELOPMENT
+#       DATABASES={
+#         "default":{
+#             "ENGINE":"django.db.backends.mysql",
+#             "NAME":"jango_deploy",
+#             "USER":"root",
+#             "PASSWORD":"viveksql",
+#             "HOST":"localhost",
+#             "PORT":"3306",
+#         }
+#     }
+
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
+}
 
 
 # Password validation
